@@ -15,7 +15,7 @@
     <groupId>com.ezbob.test</groupId>
     <artifactId>service-shuffle-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>service-shuffle-we</name>
+    <name>service-shuffle-web</name>
     <description>A Service Shuffle for EZBob interview</description>
 
     <properties>
