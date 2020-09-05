@@ -27,7 +27,7 @@ class ServiceLogApplicationE2E {
     int port;
 
     @Test
-    void healthCheck() throws IOException, InterruptedException {
+    void logMessage() throws IOException, InterruptedException {
         LogRequest logRequest = new LogRequest("stamLog");
         String body = new ObjectMapper().writeValueAsString(logRequest);
 
@@ -42,7 +42,7 @@ class ServiceLogApplicationE2E {
                 .readerFor(LogResponse.class)
                 .readValue(res.body());
 
-        LogResponse expected = new LogResponse("OK");
+        LogResponse expected = new LogResponse(true);
 
         assertThat("The responses are not equal", logResponse, isTheSameResponseAs(expected));
     }
