@@ -2,6 +2,7 @@ package com.ezbob.test.serviceshuffle.server.service;
 
 import com.ezbob.test.logserviceweb.api.LogRequest;
 import com.ezbob.test.serviceshuffle.api.ShuffleRequest;
+import com.ezbob.test.serviceshuffle.api.ShuffleResponse;
 import com.ezbob.test.serviceshuffle.factory.HttpRequestFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,13 +26,23 @@ public class ShuffleService {
         this.serviceLogBaseUrl = serviceLogBaseUrl;
     }
 
-    public List<Integer> generateRandomArray(ShuffleRequest shuffleRequest) {
+    public ShuffleResponse generateRandomArray(ShuffleRequest shuffleRequest) {
         try {
             sendRequestForLog(shuffleRequest);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return doGeneration(shuffleRequest.getNumberForRandomArray());
+
+        if (!isInputValid(shuffleRequest))
+            return ShuffleResponse.invalidResponse();
+
+        List<Integer> list = doGeneration(shuffleRequest.getNumberForRandomArray());
+        return ShuffleResponse.validResponseWith(list);
+    }
+
+    private boolean isInputValid(ShuffleRequest shuffleRequest) {
+        return shuffleRequest.getNumberForRandomArray() < 1 ||
+                shuffleRequest.getNumberForRandomArray() > 1000;
     }
 
     private void sendRequestForLog(ShuffleRequest shuffleRequest) throws IOException {

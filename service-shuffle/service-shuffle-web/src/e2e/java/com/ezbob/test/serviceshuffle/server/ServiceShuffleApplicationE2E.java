@@ -41,7 +41,7 @@ class ServiceShuffleApplicationE2E {
 
         ShuffleResponse actualShuffleResponse = executeRequestWith(shuffleRequest);
 
-        ShuffleResponse expectedShuffleResponse = new ShuffleResponse(Arrays.asList(1, 2, 3, 4, 5));
+        ShuffleResponse expectedShuffleResponse = new ShuffleResponse(Arrays.asList(1, 2, 3, 4, 5), true, "");
 
         assertThat("The responses are not equal",
                 actualShuffleResponse,

@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 class ServiceShuffleController {
     private ShuffleService service;
@@ -20,7 +18,6 @@ class ServiceShuffleController {
 
     @PostMapping("/shuffle")
     public ShuffleResponse generateArray(@RequestBody ShuffleRequest req) {
-        List<Integer> list = service.generateRandomArray(req);
-        return new ShuffleResponse(list);
+        return service.generateRandomArray(req);
     }
 }
