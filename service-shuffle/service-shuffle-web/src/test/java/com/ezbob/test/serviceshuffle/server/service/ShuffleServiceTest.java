@@ -1,4 +1,4 @@
-package com.ezbob.test.serviceshuffle.api.service;
+package com.ezbob.test.serviceshuffle.server.service;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static com.ezbob.test.serviceshuffle.api.service.HasTheSameElementMatcher.hasTheSameElementsAs;
+import static com.ezbob.test.serviceshuffle.server.service.HasTheSameElementMatcher.hasTheSameElementsAs;
 import static org.junit.Assert.assertThat;
 
 class ShuffleServiceTest {

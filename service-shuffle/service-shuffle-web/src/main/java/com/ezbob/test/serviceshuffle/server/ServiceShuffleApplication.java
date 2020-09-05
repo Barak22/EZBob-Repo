@@ -1,4 +1,4 @@
-package com.ezbob.test.serviceshuffle.api;
+package com.ezbob.test.serviceshuffle.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
