@@ -11,3 +11,5 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 /.idea
 ezbob-repo.iml
+./service-shuffle/service-shuffle.iml
+./service-log/service-log.iml
