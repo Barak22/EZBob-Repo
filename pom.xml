@@ -13,5 +13,6 @@
 
     <modules>
         <module>service-shuffle</module>
+        <module>service-log</module>
     </modules>
 </project>
