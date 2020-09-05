@@ -28,18 +28,6 @@ class ServiceShuffleApplicationE2E {
     int port;
 
     @Test
-    void healthCheck() throws IOException, InterruptedException {
-        HttpRequest req = HttpRequest.newBuilder()
-                .GET()
-                .uri(URI.create("http://localhost:" + port + "/hello"))
-                .build();
-
-        HttpResponse<String> res = HttpClient.newHttpClient().send(req, HttpResponse.BodyHandlers.ofString());
-
-        assertThat("The responses are not equal", res.body(), IsEqual.equalTo("Hello World!"));
-    }
-
-    @Test
     void getRandomArray() throws IOException, InterruptedException {
         ShuffleRequest shuffleRequest = new ShuffleRequest(5);
         String body = new ObjectMapper().writeValueAsString(shuffleRequest);
