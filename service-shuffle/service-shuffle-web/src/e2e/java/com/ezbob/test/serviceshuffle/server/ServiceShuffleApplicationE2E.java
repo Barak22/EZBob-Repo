@@ -1,5 +1,7 @@
-package com.ezbob.test.serviceshuffle.api;
+package com.ezbob.test.serviceshuffle.server;
 
+import com.ezbob.test.serviceshuffle.api.ShuffleRequest;
+import com.ezbob.test.serviceshuffle.api.ShuffleResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -39,8 +41,7 @@ class ServiceShuffleApplicationE2E {
 
     @Test
     void getRandomArray() throws IOException, InterruptedException {
-        ShuffleRequest shuffleRequest = new ShuffleRequest();
-        shuffleRequest.setNumberForRandomArray(5);
+        ShuffleRequest shuffleRequest = new ShuffleRequest(5);
         String body = new ObjectMapper().writeValueAsString(shuffleRequest);
 
         HttpRequest req = HttpRequest.newBuilder()
