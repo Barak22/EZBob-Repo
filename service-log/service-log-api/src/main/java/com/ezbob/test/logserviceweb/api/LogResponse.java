@@ -6,15 +6,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 public class LogResponse {
-    private String msg;
+    private boolean isSuccessful;
 
     @JsonCreator
-    public LogResponse(@JsonProperty("msg") String msg) {
-        this.msg = msg;
+    public LogResponse(@JsonProperty("isSuccessful") boolean isSuccessful) {
+        this.isSuccessful = isSuccessful;
     }
 
-    public String getMsg() {
-        return msg;
+    public boolean getSuccessful() {
+        return isSuccessful;
     }
 
     @Override
@@ -22,11 +22,11 @@ public class LogResponse {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LogResponse that = (LogResponse) o;
-        return Objects.equals(msg, that.msg);
+        return Objects.equals(isSuccessful, that.isSuccessful);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(msg);
+        return Objects.hash(isSuccessful);
     }
 }
