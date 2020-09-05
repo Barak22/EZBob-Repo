@@ -31,6 +31,16 @@ class ServiceLogApplicationE2E {
         LogRequest logRequest = new LogRequest("stamLog");
         String body = new ObjectMapper().writeValueAsString(logRequest);
 
+        LogResponse actualLogResponse = executeRequestWith(body);
+
+        LogResponse expectedLogResponse = new LogResponse(true);
+
+        assertThat("The responses are not equal",
+                actualLogResponse,
+                isTheSameResponseAs(expectedLogResponse));
+    }
+
+    private LogResponse executeRequestWith(String body) throws IOException, InterruptedException {
         HttpRequest req = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .header("Content-Type", "application/json")
@@ -38,13 +48,9 @@ class ServiceLogApplicationE2E {
                 .build();
 
         HttpResponse<String> res = HttpClient.newHttpClient().send(req, HttpResponse.BodyHandlers.ofString());
-        LogResponse logResponse = new ObjectMapper()
+        return new ObjectMapper()
                 .readerFor(LogResponse.class)
                 .readValue(res.body());
-
-        LogResponse expected = new LogResponse(true);
-
-        assertThat("The responses are not equal", logResponse, isTheSameResponseAs(expected));
     }
 }
 
