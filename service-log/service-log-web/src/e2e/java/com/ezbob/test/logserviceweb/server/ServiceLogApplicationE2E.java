@@ -2,6 +2,7 @@ package com.ezbob.test.logserviceweb.server;
 
 import com.ezbob.test.logserviceweb.api.LogRequest;
 import com.ezbob.test.logserviceweb.api.LogResponse;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -29,7 +30,7 @@ class ServiceLogApplicationE2E {
     @Test
     void logMessage() throws IOException, InterruptedException {
         LogRequest logRequest = new LogRequest("stamLog");
-        String body = new ObjectMapper().writeValueAsString(logRequest);
+        String body = requestAsString(logRequest);
 
         LogResponse actualLogResponse = executeRequestWith(body);
 
@@ -38,6 +39,10 @@ class ServiceLogApplicationE2E {
         assertThat("The responses are not equal",
                 actualLogResponse,
                 isTheSameResponseAs(expectedLogResponse));
+    }
+
+    private String requestAsString(LogRequest logRequest) throws JsonProcessingException {
+        return new ObjectMapper().writeValueAsString(logRequest);
     }
 
     private LogResponse executeRequestWith(String body) throws IOException, InterruptedException {
