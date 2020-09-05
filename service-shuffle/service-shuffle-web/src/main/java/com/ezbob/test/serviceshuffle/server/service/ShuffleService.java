@@ -28,19 +28,20 @@ public class ShuffleService {
     public List<Integer> generateRandomArray(ShuffleRequest shuffleRequest) {
         try {
             sendRequestForLog(shuffleRequest);
-        } catch (InterruptedException | IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return doGeneration(shuffleRequest.getNumberForRandomArray());
     }
 
-    private void sendRequestForLog(ShuffleRequest shuffleRequest) throws IOException, InterruptedException {
+    private void sendRequestForLog(ShuffleRequest shuffleRequest) throws IOException {
         String requestAsString = new ObjectMapper().writeValueAsString(shuffleRequest);
         LogRequest logRequest = new LogRequest(requestAsString);
 
         HttpRequest req = HttpRequestFactory.makePostRequestFor(serviceLogBaseUrl + "/log", logRequest);
 
-        HttpClient.newHttpClient().send(req, HttpResponse.BodyHandlers.ofString());
+        // Async request
+        HttpClient.newHttpClient().sendAsync(req, HttpResponse.BodyHandlers.ofString());
     }
 
     List<Integer> doGeneration(int numberForRandomArray) {
