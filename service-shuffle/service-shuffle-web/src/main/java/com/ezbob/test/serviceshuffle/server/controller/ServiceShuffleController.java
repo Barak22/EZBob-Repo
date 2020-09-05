@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-class Controller {
+class ServiceShuffleController {
     private ShuffleService service;
 
 
-    public Controller(ShuffleService service) {
+    public ServiceShuffleController(ShuffleService service) {
         this.service = service;
     }
 
