@@ -5,7 +5,7 @@
 
     <packaging>pom</packaging>
 
-    <groupId>com.ezbob</groupId>
+    <groupId>com.ezbob.test</groupId>
     <artifactId>ezbob-repo</artifactId>
     <name>ezbob-repo</name>
     <description>ezbob-repo</description>
