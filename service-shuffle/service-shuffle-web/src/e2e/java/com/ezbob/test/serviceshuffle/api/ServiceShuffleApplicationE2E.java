@@ -1,7 +1,5 @@
-package com.ezbob.test.serviceshuffle.server;
+package com.ezbob.test.serviceshuffle.api;
 
-import com.ezbob.test.serviceshuffle.server.controller.ShuffleRequest;
-import com.ezbob.test.serviceshuffle.server.controller.ShuffleResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;

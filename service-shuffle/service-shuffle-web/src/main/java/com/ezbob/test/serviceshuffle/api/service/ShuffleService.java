@@ -1,4 +1,4 @@
-package com.ezbob.test.serviceshuffle.server.service;
+package com.ezbob.test.serviceshuffle.api.service;
 
 import org.springframework.stereotype.Service;
 

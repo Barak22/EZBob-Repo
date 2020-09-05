@@ -1,4 +1,4 @@
-package com.ezbob.test.serviceshuffle.server.controller;
+package com.ezbob.test.serviceshuffle.api;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

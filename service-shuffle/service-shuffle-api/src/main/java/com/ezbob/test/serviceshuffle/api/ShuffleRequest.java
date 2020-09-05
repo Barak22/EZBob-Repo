@@ -1,4 +1,4 @@
-package com.ezbob.test.serviceshuffle.server.controller;
+package com.ezbob.test.serviceshuffle.api;
 
 public class ShuffleRequest {
 
