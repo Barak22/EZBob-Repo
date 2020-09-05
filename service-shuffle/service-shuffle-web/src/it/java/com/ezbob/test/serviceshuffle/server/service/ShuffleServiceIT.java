@@ -3,9 +3,7 @@ package com.ezbob.test.serviceshuffle.server.service;
 import com.ezbob.test.logserviceweb.testkit.LogServiceTestKit;
 import com.ezbob.test.logserviceweb.testkit.server.service.FakeLoggerService;
 import com.ezbob.test.serviceshuffle.api.ShuffleRequest;
-import com.ezbob.test.serviceshuffle.api.ShuffleResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +18,8 @@ import static org.junit.Assert.assertThat;
 
 public class ShuffleServiceIT {
     private static int serviceLogPort = 6000;
-    private ShuffleService service = new ShuffleService("http://localhost:" + serviceLogPort);
+    private LoggerClient loggerClient = new LoggerClient("http://localhost:" + serviceLogPort);
+    private ShuffleService service = new ShuffleService(loggerClient);
 
     @BeforeAll
     public static void before() {
@@ -40,19 +39,6 @@ public class ShuffleServiceIT {
                 () -> assertThat("shuffleRequest has not been written to the logs",
                         FakeLoggerService.getLogsList(),
                         contains(is(expected))));
-    }
-
-    @Test
-    public void shouldReturnInvalidInputResponse() {
-        ShuffleResponse actual = service.generateRandomArray(new ShuffleRequest(-1));
-        ShuffleResponse expected = ShuffleResponse.invalidResponse();
-
-        assertThat("Lists are not equal", actual, IsEqual.equalTo(expected));
-
-        actual = service.generateRandomArray(new ShuffleRequest(1001));
-        expected = ShuffleResponse.invalidResponse();
-
-        assertThat("Lists are not equal", actual, IsEqual.equalTo(expected));
     }
 
     private ShuffleRequest createShuffleRequestWith(int numberForRandomArray) {
