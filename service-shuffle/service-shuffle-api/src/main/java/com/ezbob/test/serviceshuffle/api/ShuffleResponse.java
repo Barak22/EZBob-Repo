@@ -19,10 +19,6 @@ public class ShuffleResponse {
         return list;
     }
 
-    public void setList(List<Integer> list) {
-        this.list = list;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
