@@ -20,7 +20,7 @@ class ServiceShuffleController {
 
     @PostMapping("/shuffle")
     public ShuffleResponse generateArray(@RequestBody ShuffleRequest req) {
-        List<Integer> list = service.generateRandomArray(req.getNumberForRandomArray());
+        List<Integer> list = service.generateRandomArray(req);
         return new ShuffleResponse(list);
     }
 }
