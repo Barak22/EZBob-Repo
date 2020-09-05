@@ -1,17 +1,10 @@
 package com.ezbob.test.serviceshuffle.server.service;
 
-import com.ezbob.test.logserviceweb.api.LogRequest;
 import com.ezbob.test.serviceshuffle.api.ShuffleRequest;
 import com.ezbob.test.serviceshuffle.api.ShuffleResponse;
-import com.ezbob.test.serviceshuffle.factory.HttpRequestFactory;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,15 +13,16 @@ import java.util.stream.Stream;
 @Service
 public class ShuffleService {
 
-    private String serviceLogBaseUrl;
 
-    public ShuffleService(@Value("${api.serviceLogBaseUrl}") String serviceLogBaseUrl) {
-        this.serviceLogBaseUrl = serviceLogBaseUrl;
+    private LoggerClient loggerClient;
+
+    public ShuffleService(LoggerClient loggerClient) {
+        this.loggerClient = loggerClient;
     }
 
     public ShuffleResponse generateRandomArray(ShuffleRequest shuffleRequest) {
         try {
-            sendRequestForLog(shuffleRequest);
+            loggerClient.sendRequestForLog(shuffleRequest);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -41,18 +35,8 @@ public class ShuffleService {
     }
 
     private boolean isInputValid(ShuffleRequest shuffleRequest) {
-        return shuffleRequest.getNumberForRandomArray() < 1 ||
-                shuffleRequest.getNumberForRandomArray() > 1000;
-    }
-
-    private void sendRequestForLog(ShuffleRequest shuffleRequest) throws IOException {
-        String requestAsString = new ObjectMapper().writeValueAsString(shuffleRequest);
-        LogRequest logRequest = new LogRequest(requestAsString);
-
-        HttpRequest req = HttpRequestFactory.makePostRequestFor(serviceLogBaseUrl + "/log", logRequest);
-
-        // Async request
-        HttpClient.newHttpClient().sendAsync(req, HttpResponse.BodyHandlers.ofString());
+        return shuffleRequest.getNumberForRandomArray() >= 1 &&
+                shuffleRequest.getNumberForRandomArray() <= 1000;
     }
 
     List<Integer> doGeneration(int numberForRandomArray) {
